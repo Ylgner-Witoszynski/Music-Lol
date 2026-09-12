@@ -8,7 +8,7 @@
   <meta name="description" content="Playlist de m&uacute;sicas do universo League of Legends." />
   <meta name="theme-color" content="#14061F" />
   <link rel="manifest" href="./manifest.webmanifest" />
-  <script src="/scripts/svg-inject.min.js"></script>
+  <script src="./scripts/svg-inject.min.js"></script>
   <link rel="stylesheet" href="./styles/global.css" />
 </head>
 
@@ -34,15 +34,15 @@
     </header>
     <main>
       <div class="main__content">
-        <img class="logo" src="/assets/logo.png" alt="Logo da Liga das Lendas">
+        <img class="logo" src="./assets/logo.png" alt="Logo da Liga das Lendas">
         <strong>riot games</strong>
-        <img id="track-cover" class="track-cover" src="/assets/logo.png" alt="Capa da m&uacute;sica atual">
+        <img id="track-cover" class="track-cover" src="./assets/logo.png" alt="Capa da m&uacute;sica atual">
         <div class="controll">
           <button type="button" aria-label="M&uacute;sica anterior" onclick="changeMusic(-1)"><img
-              src="/assets/icons/chevron-left.svg" alt="" onload="SVGInject(this)"></button>
+              src="./assets/icons/chevron-left.svg" alt="" onload="SVGInject(this)"></button>
           <span></span>
           <button type="button" aria-label="Pr&oacute;xima m&uacute;sica" onclick="changeMusic(1)"><img
-              src="/assets/icons/chevron-right.svg" alt="" onload="SVGInject(this)"></button>
+              src="./assets/icons/chevron-right.svg" alt="" onload="SVGInject(this)"></button>
         </div>
         <div class="music__mobile">
           <div>
@@ -84,27 +84,49 @@
         </div>
         <div class="player">
           <button type="button" id="button-shuffle" class="player-option" aria-label="Ativar modo aleat&oacute;rio"
-            onclick="toggleShuffle()"><img src="/assets/icons/repeat.svg" alt="" onload="SVGInject(this)"></button>
+            onclick="toggleShuffle()"><img src="./assets/icons/repeat.svg" alt="" onload="SVGInject(this)"></button>
           <div class="player__main">
             <button type="button" aria-label="M&uacute;sica anterior" onclick="changeMusic(-1)"><img
-                src="/assets/icons/chevron-left.svg" alt="" onload="SVGInject(this)"></button>
+                src="./assets/icons/chevron-left.svg" alt="" onload="SVGInject(this)"></button>
             <button type="button" aria-label="Tocar ou pausar" id="button__play" class="play"><img
-                src="/assets/icons/play.svg" alt="" onload="SVGInject(this)"><img src="/assets/icons/pause.svg" alt=""
+                src="./assets/icons/play.svg" alt="" onload="SVGInject(this)"><img src="./assets/icons/pause.svg" alt=""
                 onload="SVGInject(this)"></button>
             <button type="button" aria-label="Pr&oacute;xima m&uacute;sica" onclick="changeMusic(1)"><img
-                src="/assets/icons/chevron-right.svg" alt="" onload="SVGInject(this)"></button>
+                src="./assets/icons/chevron-right.svg" alt="" onload="SVGInject(this)"></button>
           </div>
           <button type="button" id="button-repeat" class="player-option" aria-label="Modo de repeti&ccedil;&atilde;o"
-            onclick="toggleRepeat()"><img src="/assets/icons/loop.svg" alt="" onload="SVGInject(this)"></button>
+            onclick="toggleRepeat()"><img src="./assets/icons/loop.svg" alt="" onload="SVGInject(this)"></button>
         </div>
         <div class="controller"><button type="button" id="button-share" class="text-button"
             onclick="shareMusic()">Compartilhar</button><button type="button" id="button-mute" class="icon-button"
-            aria-label="Silenciar" onclick="toggleMute()"><img src="/assets/icons/volume.svg" alt=""></button><input
+            aria-label="Silenciar" onclick="toggleMute()"><img src="./assets/icons/volume.svg" alt=""></button><input
             type="range" id="volume" min="0" max="100" value="80" aria-label="Volume"
             oninput="setVolume(this.value)"><span id="time">0:00 / 0:00</span></div>
       </div>
     </footer>
   </div>
+  <script id="music-catalog" type="application/json">
+    [
+      { "name": "GODS", "artist": "NewJeans", "youtubeId": "C3GouGa0noM" },
+      { "name": "Heavy Is the Crown", "artist": "Linkin Park", "youtubeId": "5FrhtahQiRc" },
+      { "name": "Phoenix", "artist": "Cailin Russo & Chrissy Costanza", "youtubeId": "i1IKnWDecwA" },
+      { "name": "Legends Never Die", "artist": "Against The Current", "youtubeId": "r6zIGXun57U" },
+      { "name": "RISE", "artist": "The Glitch Mob, Mako & The Word Alive", "youtubeId": "fB8TyLTD7EE" },
+      { "name": "Awaken", "artist": "Valerie Broussard & Ray Chen", "youtubeId": "zF5Ddo9JdpY" },
+      { "name": "POP/STARS", "artist": "K/DA", "youtubeId": "UOxkGD8qRB4" },
+      { "name": "MORE", "artist": "K/DA", "youtubeId": "3VTkBuxU4yk" },
+      { "name": "Still Here", "artist": "Forts, Tiffany Aris & 2WEI", "youtubeId": "ZHhqwBwmRkI" },
+      { "name": "VILLAIN", "artist": "K/DA feat. Madison Beer & Kim Petras", "youtubeId": "xoWxv2yZXLQ" },
+      { "name": "THE BADDEST", "artist": "K/DA", "youtubeId": "RkID8_gnTxw" },
+      { "name": "Burn It All Down", "artist": "PVRIS", "youtubeId": "1Z6CHioIn3s" },
+      { "name": "Warriors", "artist": "Imagine Dragons", "youtubeId": "fKopy74weus" },
+      { "name": "Enemy", "artist": "Imagine Dragons & JID", "youtubeId": "F5tSoaJ93ac" },
+      { "name": "GIANTS", "artist": "True Damage", "youtubeId": "sVZpHFXcFJw" },
+      { "name": "Worlds Collide", "artist": "Nicki Taylor", "youtubeId": "4Q46xYqUwZQ" },
+      { "name": "Takedown", "artist": "Huntrix", "youtubeId": "7sLZ1KJqVhA" },
+      { "name": "Ma Meilleure Ennemie", "artist": "Stromae & Pomme", "youtubeId": "1F3OGM8qj8A" }
+    ]
+  </script>
   <script src="https://www.youtube.com/iframe_api"></script>
   <script src="./scripts/index.js"></script>
 </body>

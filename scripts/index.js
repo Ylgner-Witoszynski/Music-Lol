@@ -3,6 +3,7 @@ let musics = []
 let isPlaying = false
 let player = null
 let playerReady = false
+const localVideoMode = window.location.protocol === 'file:'
 let progressEvent = null
 let volume = Number(localStorage.getItem('league-music-volume') || 80)
 let favorites = new Set(JSON.parse(localStorage.getItem('league-music-favorites') || '[]'))
@@ -160,12 +161,24 @@ function toggleMute() {
 }
 
 function loadCurrentMusic(autoplay = false) {
-  if (!playerReady || !currentMusic()) return
+  if (!currentMusic()) return
+  if (localVideoMode) {
+    const frame = document.getElementById('local-youtube-frame')
+    if (frame) frame.src = `https://www.youtube-nocookie.com/embed/${currentMusic().youtubeId}?controls=1&rel=0&playsinline=1`
+    showPlayerMessage('Modo local: use os controles dentro do vídeo.')
+    return
+  }
+  if (!playerReady) return
   showPlayerMessage('Carregando musica...')
   player[autoplay ? 'loadVideoById' : 'cueVideoById'](currentMusic().youtubeId)
 }
 
 function playMusic() {
+  if (localVideoMode) {
+    showPlayerMessage('Modo local: clique no botao de reproducao do video.')
+    document.getElementById('local-youtube-frame')?.focus()
+    return
+  }
   if (!playerReady) {
     showPlayerMessage('O player ainda esta carregando...')
     return
@@ -207,9 +220,11 @@ function onPlayerStateChange(event) {
 function onPlayerError() { showPlayerMessage('Esta faixa n\u00e3o est\u00e1 dispon\u00edvel para reprodu\u00e7\u00e3o incorporada. Escolha outra m\u00fasica.') }
 
 function initializeYouTubePlayer() {
-  if (player || !window.YT || !window.YT.Player) return
+  if (localVideoMode || player || !window.YT || !window.YT.Player) return
+  const playerVars = { playsinline: 1, rel: 0 }
+  if (window.location.protocol !== 'file:') playerVars.origin = window.location.origin
   player = new YT.Player('yt-player', {
-    width: '480', height: '270', playerVars: { playsinline: 1, rel: 0, origin: window.location.origin },
+    width: '480', height: '270', playerVars,
     events: { onReady: onPlayerReady, onStateChange: onPlayerStateChange, onError: onPlayerError }
   })
 }
@@ -227,18 +242,41 @@ document.getElementById('favorites-only').addEventListener('change', renderPlayl
 document.getElementById('playlist-toggle').addEventListener('click', togglePlaylist)
 document.getElementById('button__play').addEventListener('click', playMusic)
 
-fetch('./musics.json').then(response => {
-  if (!response.ok) throw new Error('playlist')
-  return response.json()
-}).then(data => {
+function embeddedPlaylist() {
+  return JSON.parse(document.getElementById('music-catalog').textContent)
+}
+
+function initializeLocalVideo() {
+  if (!localVideoMode || document.getElementById('local-youtube-frame')) return
+  const frame = document.createElement('iframe')
+  frame.id = 'local-youtube-frame'
+  frame.title = 'Video da musica atual'
+  frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+  frame.allowFullscreen = true
+  document.getElementById('yt-player').replaceChildren(frame)
+}
+
+function initializePlaylist(data) {
   musics = data
+  initializeLocalVideo()
   if (resume && musics[resume.index]) music = resume.index
   updateMusicInfo()
   updateOptions()
   if (!playerReady) updateMusicInfo()
   loadCurrentMusic(false)
   updateVolumeControl()
-}).catch(() => showPlayerMessage('N\u00e3o foi poss\u00edvel carregar a playlist. Atualize a p\u00e1gina e tente novamente.'))
+}
+
+const playlistRequest = window.location.protocol === 'file:'
+  ? Promise.resolve(embeddedPlaylist())
+  : fetch('./musics.json').then(response => {
+    if (!response.ok) throw new Error('playlist')
+    return response.json()
+  })
+playlistRequest.then(initializePlaylist).catch(() => {
+  try { initializePlaylist(embeddedPlaylist()) }
+  catch (_) { showPlayerMessage('N\u00e3o foi poss\u00edvel carregar a playlist.') }
+})
 
 document.addEventListener('keydown', event => {
   const actions = { Space: playMusic, ArrowRight: () => changeMusic(1), ArrowLeft: () => changeMusic(-1), KeyM: toggleMute, KeyS: toggleShuffle, KeyR: toggleRepeat }
@@ -246,5 +284,7 @@ document.addEventListener('keydown', event => {
 })
 window.addEventListener('beforeunload', () => window.clearInterval(progressEvent))
 
-if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'))
+if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'))
+}
 initializeYouTubePlayer()

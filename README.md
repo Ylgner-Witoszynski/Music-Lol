@@ -39,34 +39,34 @@ Além da reprodução de músicas, o projeto conta com persistência de preferê
 
 ### 🎵 Player
 
-* ▶️ Reprodução e pausa de faixas
-* ⏭️ Avanço para a próxima faixa
-* ⏮️ Retorno para a faixa anterior
-* 🔊 Controle de volume
-* 🔇 Modo silencioso
-* 🔀 Reprodução aleatória
-* 🔁 Modo de repetição
-* 📊 Barra de progresso interativa
-* ⏱️ Exibição da duração e progresso da faixa
+- ▶️ Reprodução e pausa de faixas
+- ⏭️ Avanço para a próxima faixa
+- ⏮️ Retorno para a faixa anterior
+- 🔊 Controle de volume
+- 🔇 Modo silencioso
+- 🔀 Reprodução aleatória
+- 🔁 Modo de repetição
+- 📊 Barra de progresso interativa
+- ⏱️ Exibição da duração e progresso da faixa
 
 ### 📚 Playlist
 
-* 🔎 Busca por músicas
-* ❤️ Sistema de favoritas
-* 📂 Playlist lateral recolhível
-* 🎵 Biblioteca de faixas do universo de League of Legends
-* ▶️ Seleção direta de qualquer faixa
+- 🔎 Busca por músicas
+- ❤️ Sistema de favoritas
+- 📂 Playlist lateral recolhível
+- 🎵 Biblioteca de faixas do universo de League of Legends
+- ▶️ Seleção direta de qualquer faixa
 
 ### 💾 Persistência
 
 As principais preferências do usuário são armazenadas no navegador:
 
-* Músicas favoritas
-* Volume
-* Modo aleatório
-* Modo de repetição
-* Última faixa reproduzida
-* Posição em que a reprodução foi interrompida
+- Músicas favoritas
+- Volume
+- Modo aleatório
+- Modo de repetição
+- Última faixa reproduzida
+- Posição em que a reprodução foi interrompida
 
 Ao retornar ao projeto, o player pode continuar a reprodução a partir do estado salvo.
 
@@ -76,23 +76,23 @@ O projeto também possui suporte a **Progressive Web App**, permitindo sua insta
 
 Inclui:
 
-* Web App Manifest
-* Service Worker
-* Cache de recursos
-* Experiência semelhante a um aplicativo instalado
+- Web App Manifest
+- Service Worker
+- Cache de recursos
+- Experiência semelhante a um aplicativo instalado
 
 ---
 
 ## ⌨️ Atalhos de teclado
 
-|   Tecla  | Ação                            |
+|  Tecla   | Ação                            |
 | :------: | ------------------------------- |
 | `Espaço` | ▶️ Tocar / pausar               |
-|    `←`   | ⏮️ Faixa anterior               |
-|    `→`   | ⏭️ Próxima faixa                |
-|    `M`   | 🔇 Silenciar / restaurar volume |
-|    `S`   | 🔀 Ativar / desativar aleatório |
-|    `R`   | 🔁 Alternar modo de repetição   |
+|   `←`    | ⏮️ Faixa anterior               |
+|   `→`    | ⏭️ Próxima faixa                |
+|   `M`    | 🔇 Silenciar / restaurar volume |
+|   `S`    | 🔀 Ativar / desativar aleatório |
+|   `R`    | 🔁 Alternar modo de repetição   |
 
 ---
 
@@ -165,6 +165,10 @@ git clone https://github.com/Ylgner-Witoszynski/Music-Lol.git
 cd Music-Lol
 ```
 
+O projeto pode ser aberto diretamente pelo `index.html`: a playlist possui um cat&aacute;logo embutido para funcionar no computador sem `fetch`. Nesse modo, o Service Worker fica desativado por uma restri&ccedil;&atilde;o do navegador, mas o player e os controles continuam dispon&iacute;veis.
+
+Para obter cache offline e a experi&ecirc;ncia completa de PWA, abra o projeto por um servidor local. A forma mais simples &eacute; usar a extens&atilde;o **Live Server** do VS Code.
+
 ### 3. Inicie um servidor local
 
 O projeto deve ser executado através de um servidor HTTP local.
@@ -177,7 +181,7 @@ Ou, caso tenha Python instalado:
 python -m http.server 8000
 ```
 
-### 4. Acesse no navegador
+Depois, acesse <http://localhost:8000>.
 
 ```text
 http://localhost:8000
@@ -198,10 +202,10 @@ npm test
 
 Os testes verificam a integridade básica da playlist, incluindo:
 
-* Quantidade mínima de faixas
-* Nome da música
-* Artista
-* Identificador válido do vídeo do YouTube
+- Quantidade mínima de faixas
+- Nome da música
+- Artista
+- Identificador válido do vídeo do YouTube
 
 Isso ajuda a evitar que entradas incompletas ou inválidas sejam adicionadas à biblioteca.
 
@@ -211,18 +215,18 @@ Isso ajuda a evitar que entradas incompletas ou inválidas sejam adicionadas à 
 
 O **League Music** também foi desenvolvido como projeto prático para explorar conceitos importantes de desenvolvimento Front-End, incluindo:
 
-* Manipulação do DOM
-* Eventos e interação com usuário
-* Consumo de APIs
-* Gerenciamento de estado no navegador
-* `localStorage`
-* Organização de dados em JSON
-* Reprodução de mídia
-* Design responsivo
-* Progressive Web Apps
-* Service Workers
-* Testes automatizados
-* Organização e manutenção de código
+- Manipulação do DOM
+- Eventos e interação com usuário
+- Consumo de APIs
+- Gerenciamento de estado no navegador
+- `localStorage`
+- Organização de dados em JSON
+- Reprodução de mídia
+- Design responsivo
+- Progressive Web Apps
+- Service Workers
+- Testes automatizados
+- Organização e manutenção de código
 
 ---
 
@@ -230,13 +234,13 @@ O **League Music** também foi desenvolvido como projeto prático para explorar 
 
 Algumas funcionalidades que podem ser exploradas em futuras versões:
 
-* [ ] 🎚️ Equalizador de áudio
-* [ ] 📜 Histórico de reprodução
-* [ ] 🎼 Criação de playlists personalizadas
-* [ ] 🌙 Temas visuais alternativos
-* [ ] 🔍 Filtros por artista e categoria
-* [ ] 📱 Melhorias específicas para dispositivos móveis
-* [ ] 🎨 Novas experiências visuais inspiradas em diferentes regiões de Runeterra
+- [ ] 🎚️ Equalizador de áudio
+- [ ] 📜 Histórico de reprodução
+- [ ] 🎼 Criação de playlists personalizadas
+- [ ] 🌙 Temas visuais alternativos
+- [ ] 🔍 Filtros por artista e categoria
+- [ ] 📱 Melhorias específicas para dispositivos móveis
+- [ ] 🎨 Novas experiências visuais inspiradas em diferentes regiões de Runeterra
 
 ---
 
