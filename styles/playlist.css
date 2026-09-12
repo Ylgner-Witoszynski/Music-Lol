@@ -1,0 +1,32 @@
+.playlist {
+  width: min(100% - 48px, 720px);
+  margin: 32px auto 0;
+  padding: 20px;
+  border: 1px solid rgba(192, 192, 192, 0.2);
+  border-radius: 12px;
+  background: rgba(20, 6, 31, 0.78);
+}
+
+.playlist__heading { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+.playlist h2 { color: var(--tertiary); }
+.playlist__heading span { color: var(--secondary); font-size: .875rem; }
+.search { display: block; margin-bottom: 14px; }
+.search span { display: block; margin-bottom: 6px; font-size: .875rem; }
+.search input { width: 100%; padding: 10px 12px; color: var(--tertiary); border: 1px solid rgba(192, 192, 192, .3); border-radius: 7px; background: rgba(255, 255, 255, .06); }
+.favorites-filter { display: flex; gap: 8px; align-items: center; margin: 0 0 14px; font-size: .9rem; }
+.about { width: min(100% - 48px, 720px); margin: 24px auto 0; padding: 20px; border-radius: 12px; background: rgba(20, 6, 31, .65); }
+.about h2 { margin-bottom: 8px; color: var(--tertiary); }
+.about p { line-height: 1.5; opacity: .8; }
+.playlist__empty { padding: 18px; text-align: center; opacity: .7; }
+#playlist-items { display: grid; gap: 6px; list-style: none; }
+.playlist__item { display: grid; grid-template-columns: 36px 1fr 34px; align-items: center; gap: 10px; padding: 10px; border-radius: 8px; }
+.playlist__item:hover, .playlist__item.active { background: rgba(46, 244, 204, .12); }
+.playlist__track { overflow: hidden; color: var(--primary); background: transparent; text-align: left; }
+.playlist__track strong, .playlist__track small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.playlist__track strong { color: var(--tertiary); font-size: 1rem; }
+.playlist__track small { margin-top: 3px; opacity: .7; }
+.playlist__number { color: var(--secondary); text-align: center; }
+.playlist__favorite, .favorite-button, .icon-button { color: var(--secondary); background: transparent; font-size: 1.5rem; }
+.playlist__favorite.active, .favorite-button.active { color: #ff6b9d; }
+
+@media(max-width: 768px) { .playlist { width: 100%; } }

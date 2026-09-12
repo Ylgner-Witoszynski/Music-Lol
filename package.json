@@ -1,0 +1,5 @@
+{
+  "name": "music-lol",
+  "private": true,
+  "scripts": { "test": "node tests/playlist.test.js" }
+}
