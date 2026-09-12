@@ -40,7 +40,6 @@ function updateMusicInfo() {
   const cover = `https://i.ytimg.com/vi/${track.youtubeId}/hqdefault.jpg`
   document.getElementById('track-cover').src = cover
   document.getElementById('track-cover').alt = `Capa de ${track.name}`
-  document.documentElement.style.setProperty('--track-background', `url("${cover}")`)
   renderPlaylist()
 }
 
@@ -162,6 +161,13 @@ function loadCurrentMusic(autoplay = false) {
 
 function playMusic() { if (playerReady) isPlaying ? player.pauseVideo() : player.playVideo() }
 function handleToggle() { document.getElementById('button__toggle').classList.toggle('active'); document.getElementById('navigation').classList.toggle('active') }
+function togglePlaylist() {
+  const panel = document.getElementById('playlist-panel')
+  const hidden = panel.classList.toggle('is-collapsed')
+  const button = document.getElementById('playlist-toggle')
+  button.textContent = hidden ? 'Abrir playlist' : 'Recolher playlist'
+  button.setAttribute('aria-expanded', String(!hidden))
+}
 
 function onPlayerReady() {
   playerReady = true

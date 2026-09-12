@@ -32,7 +32,8 @@
           </div>
           <div class="music__mobile"><div><h2></h2></div><h3></h3></div>
           <section class="video-player" aria-label="Player oficial do YouTube"><div id="yt-player"></div><p id="player-message" role="status" hidden></p></section>
-          <section class="playlist" aria-labelledby="playlist-title">
+          <button type="button" id="playlist-toggle" aria-expanded="true" aria-controls="playlist-panel" onclick="togglePlaylist()">Recolher playlist</button>
+          <section id="playlist-panel" class="playlist" aria-labelledby="playlist-title">
             <div class="playlist__heading"><h2 id="playlist-title">Sua playlist</h2><span id="favorite-count">0 favoritas</span></div>
             <label class="search"><span>Buscar m&uacute;sica</span><input id="search" type="search" placeholder="T&iacute;tulo ou artista" autocomplete="off"></label>
             <label class="favorites-filter"><input id="favorites-only" type="checkbox"> Mostrar somente favoritas</label>

@@ -2,10 +2,10 @@ main {
   flex: 1;
   display: flex;
 
-  background-image: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)), var(--track-background, url('/assets/background.png'));
+  background-image: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)), url('/assets/background.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 }
 
 .main__content {
