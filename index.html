@@ -1,65 +1,112 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>League Music &mdash; Ylgner Witoszynski</title>
-    <meta name="description" content="Playlist de m&uacute;sicas do universo League of Legends." />
-    <meta name="theme-color" content="#14061F" />
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <script src="/scripts/svg-inject.min.js"></script>
-    <link rel="stylesheet" href="./styles/global.css" />
-  </head>
-  <body>
-    <div class="app">
-      <header>
-        <div class="header__content">
-          <button type="button" id="button__toggle" aria-label="Abrir menu" onclick="handleToggle()"><span></span><span></span><span></span><span></span></button>
-          <nav><ul id="navigation"><li><a href="/">In&iacute;cio</a></li><li><a href="#playlist-title">Buscar</a></li><li class="active"><a href="#playlist-title">Sua biblioteca</a></li></ul></nav>
-          <h1>music legends</h1>
-          <div class="user"><span>Ylgner Witoszynski Santana</span><div class="user__avatar"><img src="https://github.com/Ylgner-Witoszynski.png" alt="Avatar de Ylgner Witoszynski Santana"></div></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>League Music &mdash; Ylgner Witoszynski</title>
+  <meta name="description" content="Playlist de m&uacute;sicas do universo League of Legends." />
+  <meta name="theme-color" content="#14061F" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <script src="/scripts/svg-inject.min.js"></script>
+  <link rel="stylesheet" href="./styles/global.css" />
+</head>
+
+<body>
+  <div class="app">
+    <header>
+      <div class="header__content">
+        <button type="button" id="button__toggle" aria-label="Abrir menu"
+          onclick="handleToggle()"><span></span><span></span><span></span><span></span></button>
+        <nav>
+          <ul id="navigation">
+            <li><a href="/">In&iacute;cio</a></li>
+            <li><a href="#playlist-title">Buscar</a></li>
+            <li class="active"><a href="#playlist-title">Sua biblioteca</a></li>
+          </ul>
+        </nav>
+        <h1>music legends</h1>
+        <div class="user"><span>Ylgner Witoszynski Santana</span>
+          <div class="user__avatar"><img src="https://github.com/Ylgner-Witoszynski.png"
+              alt="Avatar de Ylgner Witoszynski Santana"></div>
         </div>
-      </header>
-      <main>
-        <div class="main__content">
-          <img class="logo" src="/assets/logo.png" alt="Logo da Liga das Lendas">
-          <strong>riot games</strong>
-          <img id="track-cover" class="track-cover" src="/assets/logo.png" alt="Capa da m&uacute;sica atual">
-          <div class="controll">
-            <button type="button" aria-label="M&uacute;sica anterior" onclick="changeMusic(-1)"><img src="/assets/icons/chevron-left.svg" alt="" onload="SVGInject(this)"></button>
-            <span></span>
-            <button type="button" aria-label="Pr&oacute;xima m&uacute;sica" onclick="changeMusic(1)"><img src="/assets/icons/chevron-right.svg" alt="" onload="SVGInject(this)"></button>
+      </div>
+    </header>
+    <main>
+      <div class="main__content">
+        <img class="logo" src="/assets/logo.png" alt="Logo da Liga das Lendas">
+        <strong>riot games</strong>
+        <img id="track-cover" class="track-cover" src="/assets/logo.png" alt="Capa da m&uacute;sica atual">
+        <div class="controll">
+          <button type="button" aria-label="M&uacute;sica anterior" onclick="changeMusic(-1)"><img
+              src="/assets/icons/chevron-left.svg" alt="" onload="SVGInject(this)"></button>
+          <span></span>
+          <button type="button" aria-label="Pr&oacute;xima m&uacute;sica" onclick="changeMusic(1)"><img
+              src="/assets/icons/chevron-right.svg" alt="" onload="SVGInject(this)"></button>
+        </div>
+        <div class="music__mobile">
+          <div>
+            <h2></h2>
           </div>
-          <div class="music__mobile"><div><h2></h2></div><h3></h3></div>
-          <section class="video-player" aria-label="Player oficial do YouTube"><div id="yt-player"></div><p id="player-message" role="status" hidden></p></section>
-          <button type="button" id="playlist-toggle" aria-expanded="true" aria-controls="playlist-panel" onclick="togglePlaylist()">Recolher playlist</button>
-          <section id="playlist-panel" class="playlist" aria-labelledby="playlist-title">
-            <div class="playlist__heading"><h2 id="playlist-title">Sua playlist</h2><span id="favorite-count">0 favoritas</span></div>
-            <label class="search"><span>Buscar m&uacute;sica</span><input id="search" type="search" placeholder="T&iacute;tulo ou artista" autocomplete="off"></label>
-            <label class="favorites-filter"><input id="favorites-only" type="checkbox"> Mostrar somente favoritas</label>
-            <ul id="playlist-items"></ul>
-          </section>
-          <section class="about" aria-labelledby="about-title"><h2 id="about-title">Sobre</h2><p>Projeto visual n&atilde;o oficial criado por Ylgner Witoszynski Santana. M&uacute;sicas e marcas pertencem aos seus respectivos titulares, incluindo Riot Games. A reprodu&ccedil;&atilde;o &eacute; fornecida por embeds oficiais do YouTube.</p></section>
+          <h3></h3>
         </div>
-      </main>
-      <footer>
-        <button type="button" id="timeline" aria-label="Avan&ccedil;ar na m&uacute;sica" onclick="seekMusic(event)"></button>
-        <div class="footer__content">
-          <div class="music"><button type="button" id="button-favorite" class="favorite-button" aria-label="Adicionar m&uacute;sica aos favoritos" onclick="toggleFavorite()">&hearts;</button><h2></h2><h3></h3></div>
-          <div class="player">
-            <button type="button" id="button-shuffle" class="player-option" aria-label="Ativar modo aleat&oacute;rio" onclick="toggleShuffle()"><img src="/assets/icons/repeat.svg" alt="" onload="SVGInject(this)"></button>
-            <div class="player__main">
-              <button type="button" aria-label="M&uacute;sica anterior" onclick="changeMusic(-1)"><img src="/assets/icons/chevron-left.svg" alt="" onload="SVGInject(this)"></button>
-              <button type="button" aria-label="Tocar ou pausar" onclick="playMusic()" id="button__play" class="play"><img src="/assets/icons/play.svg" alt="" onload="SVGInject(this)"><img src="/assets/icons/pause.svg" alt="" onload="SVGInject(this)"></button>
-              <button type="button" aria-label="Pr&oacute;xima m&uacute;sica" onclick="changeMusic(1)"><img src="/assets/icons/chevron-right.svg" alt="" onload="SVGInject(this)"></button>
-            </div>
-            <button type="button" id="button-repeat" class="player-option" aria-label="Modo de repeti&ccedil;&atilde;o" onclick="toggleRepeat()"><img src="/assets/icons/loop.svg" alt="" onload="SVGInject(this)"></button>
+        <section class="video-player" aria-label="Player oficial do YouTube">
+          <div id="yt-player"></div>
+          <p id="player-message" role="status" hidden></p>
+        </section>
+        <button type="button" id="playlist-toggle" aria-expanded="true" aria-controls="playlist-panel">Recolher
+          playlist</button>
+        <section id="playlist-panel" class="playlist" aria-labelledby="playlist-title" aria-hidden="false">
+          <div class="playlist__heading">
+            <h2 id="playlist-title">Sua playlist</h2><span id="favorite-count">0 favoritas</span>
           </div>
-          <div class="controller"><button type="button" id="button-share" class="text-button" onclick="shareMusic()">Compartilhar</button><button type="button" id="button-mute" class="icon-button" aria-label="Silenciar" onclick="toggleMute()"><img src="/assets/icons/volume.svg" alt=""></button><input type="range" id="volume" min="0" max="100" value="80" aria-label="Volume" oninput="setVolume(this.value)"><span id="time">0:00 / 0:00</span></div>
+          <label class="search"><span>Buscar m&uacute;sica</span><input id="search" type="search"
+              placeholder="T&iacute;tulo ou artista" autocomplete="off"></label>
+          <label class="favorites-filter"><input id="favorites-only" type="checkbox"> Mostrar somente favoritas</label>
+          <ul id="playlist-items"></ul>
+        </section>
+        <section class="about" aria-labelledby="about-title">
+          <h2 id="about-title">Sobre</h2>
+          <p>Projeto visual n&atilde;o oficial criado por Ylgner Witoszynski Santana. M&uacute;sicas e marcas pertencem
+            aos seus respectivos titulares, incluindo Riot Games. A reprodu&ccedil;&atilde;o &eacute; fornecida por
+            embeds oficiais do YouTube.</p>
+        </section>
+      </div>
+    </main>
+    <footer>
+      <button type="button" id="timeline" aria-label="Avan&ccedil;ar na m&uacute;sica"
+        onclick="seekMusic(event)"></button>
+      <div class="footer__content">
+        <div class="music"><button type="button" id="button-favorite" class="favorite-button"
+            aria-label="Adicionar m&uacute;sica aos favoritos" onclick="toggleFavorite()">&hearts;</button>
+          <h2></h2>
+          <h3></h3>
         </div>
-      </footer>
-    </div>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="./scripts/index.js"></script>
-  </body>
+        <div class="player">
+          <button type="button" id="button-shuffle" class="player-option" aria-label="Ativar modo aleat&oacute;rio"
+            onclick="toggleShuffle()"><img src="/assets/icons/repeat.svg" alt="" onload="SVGInject(this)"></button>
+          <div class="player__main">
+            <button type="button" aria-label="M&uacute;sica anterior" onclick="changeMusic(-1)"><img
+                src="/assets/icons/chevron-left.svg" alt="" onload="SVGInject(this)"></button>
+            <button type="button" aria-label="Tocar ou pausar" id="button__play" class="play"><img
+                src="/assets/icons/play.svg" alt="" onload="SVGInject(this)"><img src="/assets/icons/pause.svg" alt=""
+                onload="SVGInject(this)"></button>
+            <button type="button" aria-label="Pr&oacute;xima m&uacute;sica" onclick="changeMusic(1)"><img
+                src="/assets/icons/chevron-right.svg" alt="" onload="SVGInject(this)"></button>
+          </div>
+          <button type="button" id="button-repeat" class="player-option" aria-label="Modo de repeti&ccedil;&atilde;o"
+            onclick="toggleRepeat()"><img src="/assets/icons/loop.svg" alt="" onload="SVGInject(this)"></button>
+        </div>
+        <div class="controller"><button type="button" id="button-share" class="text-button"
+            onclick="shareMusic()">Compartilhar</button><button type="button" id="button-mute" class="icon-button"
+            aria-label="Silenciar" onclick="toggleMute()"><img src="/assets/icons/volume.svg" alt=""></button><input
+            type="range" id="volume" min="0" max="100" value="80" aria-label="Volume"
+            oninput="setVolume(this.value)"><span id="time">0:00 / 0:00</span></div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="./scripts/index.js"></script>
+</body>
+
 </html>

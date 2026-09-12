@@ -1,7 +1,13 @@
 footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 7;
   display: flex;
-
-  position: relative;
+  border-top: 1px solid rgba(192, 192, 192, .18);
+  background: rgba(20, 6, 31, .92);
+  backdrop-filter: blur(18px);
 }
 
 #timeline {
@@ -34,17 +40,20 @@ footer {
 .footer__content {
   width: 100%;
   max-width: 1720px;
+  min-height: 96px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 16px 24px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 32px;
 }
 
 .music, .controller {
   width: 100%;
   max-width: 400px;
+  min-width: 0;
 }
 
 .music {
@@ -61,22 +70,31 @@ footer {
 }
 
 .music h2 {
+  min-width: 0;
+  overflow: hidden;
   color: var(--tertiary);
   font-size: 1.5rem;
   line-height: 1.75rem;
   font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .music h3 {
+  min-width: 0;
+  overflow: hidden;
   font-size: 1.125rem;
   line-height: 1.25rem;
   font-weight: 500;
 
+  text-overflow: ellipsis;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .player {
   display: flex;
+  flex: 0 1 auto;
   align-items: center;
   column-gap: 100px;
 }
@@ -173,6 +191,10 @@ footer {
     column-gap: 24px;
   }
 
+  .footer__content {
+    gap: 20px;
+  }
+
   .player > svg {
     width: 24px;
   }
@@ -191,6 +213,11 @@ footer {
 }
 
 @media(max-width: 768px) {
+  .footer__content {
+    min-height: 72px;
+    padding: 12px 16px;
+  }
+
   .controller, .music {
     display: none;
     visibility: hidden;

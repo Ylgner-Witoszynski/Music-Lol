@@ -30,8 +30,14 @@ function updateMusicInfo() {
   const track = currentMusic()
   if (!track) return
   document.querySelector('.controll span').textContent = `${music + 1} / ${musics.length}`
-  document.querySelectorAll('h2:not(#playlist-title)').forEach(element => element.textContent = track.name)
-  document.querySelectorAll('h3').forEach(element => element.textContent = track.artist)
+  document.querySelectorAll('h2:not(#playlist-title)').forEach(element => {
+    element.textContent = track.name
+    element.title = track.name
+  })
+  document.querySelectorAll('h3').forEach(element => {
+    element.textContent = track.artist
+    element.title = track.artist
+  })
   const favoriteButton = document.getElementById('button-favorite')
   const isFavorite = favorites.has(track.youtubeId)
   favoriteButton.classList.toggle('active', isFavorite)
@@ -159,7 +165,13 @@ function loadCurrentMusic(autoplay = false) {
   player[autoplay ? 'loadVideoById' : 'cueVideoById'](currentMusic().youtubeId)
 }
 
-function playMusic() { if (playerReady) isPlaying ? player.pauseVideo() : player.playVideo() }
+function playMusic() {
+  if (!playerReady) {
+    showPlayerMessage('O player ainda esta carregando...')
+    return
+  }
+  isPlaying ? player.pauseVideo() : player.playVideo()
+}
 function handleToggle() { document.getElementById('button__toggle').classList.toggle('active'); document.getElementById('navigation').classList.toggle('active') }
 function togglePlaylist() {
   const panel = document.getElementById('playlist-panel')
@@ -167,6 +179,7 @@ function togglePlaylist() {
   const button = document.getElementById('playlist-toggle')
   button.textContent = hidden ? 'Abrir playlist' : 'Recolher playlist'
   button.setAttribute('aria-expanded', String(!hidden))
+  panel.setAttribute('aria-hidden', String(hidden))
 }
 
 function onPlayerReady() {
@@ -193,12 +206,15 @@ function onPlayerStateChange(event) {
 
 function onPlayerError() { showPlayerMessage('Esta faixa n\u00e3o est\u00e1 dispon\u00edvel para reprodu\u00e7\u00e3o incorporada. Escolha outra m\u00fasica.') }
 
-function onYouTubeIframeAPIReady() {
+function initializeYouTubePlayer() {
+  if (player || !window.YT || !window.YT.Player) return
   player = new YT.Player('yt-player', {
-    width: '480', height: '270', playerVars: { playsinline: 1, rel: 0 },
+    width: '480', height: '270', playerVars: { playsinline: 1, rel: 0, origin: window.location.origin },
     events: { onReady: onPlayerReady, onStateChange: onPlayerStateChange, onError: onPlayerError }
   })
 }
+
+window.onYouTubeIframeAPIReady = initializeYouTubePlayer
 
 document.getElementById('playlist-items').addEventListener('click', event => {
   const track = event.target.closest('[data-track]')
@@ -208,6 +224,8 @@ document.getElementById('playlist-items').addEventListener('click', event => {
 })
 document.getElementById('search').addEventListener('input', renderPlaylist)
 document.getElementById('favorites-only').addEventListener('change', renderPlaylist)
+document.getElementById('playlist-toggle').addEventListener('click', togglePlaylist)
+document.getElementById('button__play').addEventListener('click', playMusic)
 
 fetch('./musics.json').then(response => {
   if (!response.ok) throw new Error('playlist')
@@ -229,3 +247,4 @@ document.addEventListener('keydown', event => {
 window.addEventListener('beforeunload', () => window.clearInterval(progressEvent))
 
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'))
+initializeYouTubePlayer()
